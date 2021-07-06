@@ -8,5 +8,10 @@ const clearBaseResponse = () => {
     base_response.fulfillment_response.messages[0].text.text = [];
 }
 
+const pushMessage = (message) => {
+    base_response.fulfillment_response.messages[0].text.text.push(message);
+}
+
 exports.getBaseResponse = getBaseResponse;
 exports.clearBaseResponse = clearBaseResponse;
+exports.pushMessage = pushMessage;

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
-const { getBaseResponse, clearBaseResponse } = require('./BaseResponseFactory.js');
+const { getBaseResponse, clearBaseResponse, pushMessage } = require('./BaseResponseFactory.js');
 
 app.use(bodyParser.json());
 
@@ -12,13 +12,13 @@ app.post("/webhook/endflow", (request, response) => {
 
     if (tag === "thanks") {
         // WebhookResponse object
-        base_response.fulfillment_response.messages[0].text.text.push("Thanks for ordering!")
-        base_response.fulfillment_response.messages[0].text.text.push("Thank you! Hope you like it!")
+        pushMessage("Thanks for ordering!")
+        pushMessage("Thank you! Hope you like it!")
 
         response.json(base_response);
     } else {
         // WebhookResponse object
-        base_response.fulfillment_response.messages[0].text.text.push(`No fulfillment with tag ${tag}`);
+        pushMessage(`No fulfillment with tag ${tag}`);
         response.json(base_response);   
     }
 
